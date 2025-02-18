@@ -1,0 +1,103 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fbfbfb;
+  /* display: flex; */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
+.register-container{
+  background: #f2dfbe;
+  padding: 30px; /* Increased padding for more space */
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* Increased width for more spacious layout */
+  text-align: center;
+  border: 2px solid #b87333;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 500px; 
+}
+
+/* Register Container */
+.container {
+  display: flex;
+
+  justify-content: center; 
+  /* Keeping the height the same */
+  align-items: center;
+  padding: 10px;
+}
+
+.container h2 {
+  font-size: 24px; /* Increased font size */
+  font-weight: 700;
+  margin-bottom: 20px; /* Increased margin */
+  color: #5a3e1b;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 15px; /* Increased gap between fields */
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px; /* Increased margin for better readability */
+  color: #5a3e1b;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 15px; /* Increased gap between fields */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #d87d34;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px; /* Added more space above the button */
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background: #b66e2f;
+}
+
+.login-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #d87d34;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+
+.register-form{
+  justify-content: center;
+  align-items: center;
+}
