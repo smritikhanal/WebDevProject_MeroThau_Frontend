@@ -1,0 +1,103 @@
+/* Set background color */
+body {
+  background-color: #f7f7f7; /* slightly lighter grey */
+  font-family: Arial, sans-serif;
+}
+
+/* Centering the login box */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login box styling */
+.login-box {
+  background: #f9e9c6; /* a slightly lighter warm tone */
+  border: 2px solid #a65e2e; /* slightly darker, muted copper tone */
+  padding: 30px;
+  border-radius: 5px;
+  text-align: center;
+  width: 350px;
+}
+
+/* Heading */
+h2 {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #5a3e1b; /* deep brown for a richer tone */
+}
+
+/* Label Styling */
+label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin: 5px 0;
+  color: #5a3e1b;
+}
+
+/* Input Fields */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+/* Remember me and Forgot password */
+.options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Ensure the checkbox and label remain aligned */
+.options > div {
+  display: flex;
+  align-items: center;
+}
+
+/* Shift the forgot password link down a bit */
+.options a {
+  display: inline-block;
+  margin-top: 5px;
+  text-decoration: none;
+  color: #5a3e1b; /* using the same deep brown for consistency */
+  font-weight: bold;
+}
+
+/* Login Button */
+.login-btn {
+  background-color: #c16845; /* slightly toned down orange-brown */
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.login-btn:hover {
+  background-color: #a65e2e; /* matching the login box border color */
+}
+
+/* Register Text */
+.register-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #5a3e1b;
+}
+
+.create-now {
+  color: #d81b60; /* a slightly deeper pink */
+  font-weight: bold;
+  text-decoration: none;
+}
