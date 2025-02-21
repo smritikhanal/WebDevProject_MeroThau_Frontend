@@ -57,6 +57,13 @@
   font-size: 0.9rem;
 }
 
+/* Star rating styling using FontAwesome */
+.stay-info .fas {
+  color: #ffc107;
+  margin-right: 3px;
+  font-size: 1.2rem;
+}
+
 /* Discount price styling */
 .discount {
   text-decoration: line-through;
@@ -70,20 +77,32 @@
   color: #d9534f;
 }
 
-/* View More Link styling */
-.viewmore {
+/* Buttons container */
+.buttons {
+  display: flex;
+  gap: 10px;
   margin-top: 15px;
 }
 
-.viewmore a {
-  color: #007bff;
+/* View More & Feedback button styling */
+.viewmore, .feedback {
+  background: #eca461;
+  color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.2s ease;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
 }
 
-.viewmore a:hover {
-  color: #0056b3;
+.viewmore:hover, .feedback:hover {
+  background: #eca461;
+}
+
+/* Location icon */
+.stay-info .fa-map-marker-alt {
+  color: #dc3545;
+  margin-right: 5px;
 }
 
 /* Responsive adjustments */
@@ -93,15 +112,25 @@
     align-items: center;
     text-align: center;
   }
-  
+
   .stay img {
     margin: 0 0 15px 0;
     width: 100%;
     max-width: 300px;
     height: auto;
   }
-  
+
   .stay-info h2 {
     font-size: 1.6rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .viewmore, .feedback {
+    width: 100%;
+    text-align: center;
   }
 }
