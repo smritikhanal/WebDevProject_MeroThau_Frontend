@@ -32,7 +32,7 @@
 
 .info-box h3 {
   font-size: 2rem;
-  color: #e14b4b;
+  color: #f57f17;
   margin-bottom: 1rem;
 }
 
@@ -58,7 +58,7 @@
 
 .message-box h3 {
   font-size: 2rem;
-  color: #e14b4b;
+  color: #f57f17;
 }
 
 .message-box p {
@@ -84,7 +84,7 @@
 
 .message-box form button {
   padding: 1rem 2rem;
-  background-color: #e14b4b;
+  background-color: #f57f17;
   color: white;
   border: none;
   border-radius: 8px;
@@ -94,7 +94,7 @@
 }
 
 .message-box form button:hover {
-  background-color: #c43737;
+  background-color: #f57f17;
 }
 
 /* Contact Link Styling: Only affects the icon */
