@@ -12,7 +12,7 @@ import KarmaVilla from "../assets/karma villa 1.jpg";
 const Allhotels = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-
+  console.log(queryParams)
   const checkIn = queryParams.get('checkIn');
   const checkOut = queryParams.get('checkOut');
   const rooms = queryParams.get('rooms');
@@ -40,7 +40,9 @@ const Allhotels = () => {
             <p><i className="fas fa-map-marker-alt"></i> 3.4 km from Airport</p>
             <p className="limited">Only 2 left at this Price</p>
             <div className="buttons">
-              <Link to="/Hotels/HotelMalla" className="viewmore">View More</Link>  
+            <Link to={`/Hotels/HotelMalla?checkIn=${checkIn}&checkOut=${checkOut}&rooms=${rooms}&guests=${guests}`} className="viewmore">
+  View More
+</Link>
               <Link to="/ReviewFeedback" className="feedback">Feedback</Link>  
             </div>
           </div>
@@ -61,7 +63,11 @@ const Allhotels = () => {
             <p>Rs.1,500 <span className="discount">Rs. 2,200</span></p>
             <p><i className="fas fa-map-marker-alt"></i> 2.3 km from Lakeside</p>
             <div className="buttons">
-              <Link to="/Hotels/Fishtail" className="viewmore">View More</Link>  
+            <Link to={`/Hotels/Fishtail?checkIn=${checkIn}&checkOut=${checkOut}&rooms=${rooms}&guests=${guests}`} className="viewmore">
+  View More
+</Link>
+
+              
               <Link to="/ReviewFeedback" className="feedback">Feedback</Link>  
             </div>
           </div>
@@ -83,7 +89,10 @@ const Allhotels = () => {
             <p><i className="fas fa-map-marker-alt"></i> 1.6 km from Lakeside</p>
             <p className="limited">Only 5 left at this Price</p>
             <div className="buttons">
-              <Link to="/Hotels/LakesideStay" className="viewmore">View More</Link>  
+            <Link to={`/Hotels/LakesideStay?checkIn=${checkIn}&checkOut=${checkOut}&rooms=${rooms}&guests=${guests}`} className="viewmore">
+  View More
+</Link>
+
               <Link to="/ReviewFeedback" className="feedback">Feedback</Link>  
             </div>
           </div>
@@ -106,7 +115,10 @@ const Allhotels = () => {
             <p><i className="fas fa-map-marker-alt"></i> 5.9 km from Airport</p>
             <p className="limited">Only 4 left at this Price</p>
             <div className="buttons">
-              <Link to="/Hotels/KarmaVilla" className="viewmore">View More</Link>  
+            <Link to={`/Hotels/KarmaVilla?checkIn=${checkIn}&checkOut=${checkOut}&rooms=${rooms}&guests=${guests}`} className="viewmore">
+  View More
+</Link>
+
               <Link to="/ReviewFeedback" className="feedback">Feedback</Link>  
             </div>
           </div>
