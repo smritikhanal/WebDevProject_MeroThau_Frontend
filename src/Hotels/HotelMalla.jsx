@@ -16,7 +16,7 @@ import HotelMalla6 from "../assets/hotelmalla 6.jpg";
 const HotelMalla = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-
+  console.log(queryParams)
   const checkIn = queryParams.get('checkIn');
   const checkOut = queryParams.get('checkOut');
   const rooms = queryParams.get('rooms');
