@@ -1,5 +1,5 @@
-import React, { useState } from 'react'; // Import useState
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import "../Styles/Services.css";
@@ -13,18 +13,34 @@ const Services = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (checkIn && checkOut && rooms && guests) {
-      // Passing query parameters to Allhotels page
-      navigate(`/all-hotels?checkIn=${checkIn}&checkOut=${checkOut}&rooms=${rooms}&guests=${guests}`);
-    } else {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+
+    if (!checkIn || !checkOut || !rooms || !guests) {
       alert("Please fill in all fields before confirming.");
+      return;
     }
+
+    if (checkInDate <= today) {
+      alert("Check-in date must be greater than today's date.");
+      return;
+    }
+
+    if (checkOutDate <= checkInDate) {
+      alert("Check-out date must be after the check-in date.");
+      return;
+    }
+
+    // Navigate with query parameters
+    navigate(`/all-hotels?checkIn=${checkIn}&checkOut=${checkOut}&rooms=${rooms}&guests=${guests}`);
   };
 
   return (
     <div>
-        <Navbar />
-   
+      <Navbar />
       <section className="search-section">
         <div className="search-container">
           <div className="search-field">
@@ -50,7 +66,6 @@ const Services = () => {
             <input
               type="number"
               id="rooms"
-              placeholder="e.g., 2"
               min="1"
               value={rooms}
               onChange={(e) => setRooms(e.target.value)}
@@ -61,7 +76,6 @@ const Services = () => {
             <input
               type="number"
               id="guests"
-              placeholder="e.g., 4"
               min="1"
               value={guests}
               onChange={(e) => setGuests(e.target.value)}
