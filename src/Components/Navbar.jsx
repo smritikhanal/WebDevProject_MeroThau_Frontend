@@ -1,9 +1,8 @@
-
-
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom"; 
 import "../Styles/Navbar.css"; 
 import logo from "../assets/logo.png"; 
+import { FaUserCircle } from 'react-icons/fa'; // Import the profile icon (FontAwesome)
 
 const Navbar = () => {
   const [loginClicked, setLoginClicked] = useState(false); // State to track Login button click
@@ -24,7 +23,7 @@ const Navbar = () => {
         <h1>मेरो Thau</h1>
       </div>
       <nav>
-        <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+        <Link to="/home" className={location.pathname === "/home" ? "active" : ""}>
           Home
         </Link>
 
@@ -39,6 +38,7 @@ const Navbar = () => {
           to="/services" 
           className={location.pathname.startsWith("/services") ||
             location.pathname.startsWith("/all-hotels") ||
+            location.pathname.startsWith("/ReviewFeedback") ||
             location.pathname.startsWith("/Hotels/HotelMalla") ||
             location.pathname.startsWith("/Hotels/Fishtail") ||
             location.pathname.startsWith("/Hotels/KarmaVilla") ||
@@ -55,15 +55,23 @@ const Navbar = () => {
       </nav>
 
       {/* Conditionally render the Login button on the homepage */}
-      {location.pathname === "/" && (
-        <button className="auth-button">
-          <Link to="/login">Login</Link>
-        </button>
+      {location.pathname === "/home" && (
+        <>
+          <button className="auth-button">
+            <Link to="/login">Login</Link>
+          </button>
+          
+          {/* Profile Icon with Tooltip */}
+          <div className="profile-icon-container">
+            <Link to="/profile">
+              <FaUserCircle className="profile-icon" />
+            </Link>
+            <span className="tooltip">Update Your Profile</span>
+          </div>
+        </>
       )}
     </header>
   );
 };
 
 export default Navbar;
-
-
