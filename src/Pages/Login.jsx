@@ -41,7 +41,7 @@ const Login = () => {
       localStorage.setItem("loginClicked", "true");
 
       // Navigate to the About Us page upon successful login
-      navigate("/AboutUs");
+      navigate("/home");
     } catch (err) {
       console.error("Login error:", err.response.data);
       setError(err.response.data.message || "Login failed. Please try again.");
