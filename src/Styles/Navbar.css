@@ -58,3 +58,38 @@ header .auth-button a {
     color: white;
     text-decoration: none;
 }
+/* Profile Icon Container */
+.profile-icon-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px; /* Reduced the distance between icon and login button */
+    cursor: pointer;
+  }
+  
+  .profile-icon {
+    font-size: 24px; /* Adjust the icon size */
+    color: #333;
+  }
+  
+  /* Tooltip Text */
+  .profile-icon-container .tooltip {
+    visibility: hidden;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    bottom: 30px; /* Position the tooltip above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  /* Show tooltip when hovering over the profile icon */
+  .profile-icon-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
