@@ -1,0 +1,115 @@
+/* Confirmation Page Styles */
+.confirmation-page {
+  background: #f4ead8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Confirmation Section */
+.confirmation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  padding: 4rem 2rem;
+}
+
+.confirmation-box {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+}
+
+.confirmation-box h3 {
+  font-size: 2rem;
+  color: #f57f17;
+  margin-bottom: 1rem;
+}
+
+.confirmation-message {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.confirmation-details p {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0.5rem 0;
+  text-align: left;
+}
+
+.confirmation-form label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 12px;
+  color: #444;
+  font-size: 14px;
+}
+
+.confirmation-form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+.payment-options label {
+  display: flex;
+  align-items: center; /* Aligns the text and button */
+  font-size: 14px;
+}
+
+.payment-options input[type="radio"] {
+  margin-right: 8px; /* Reduces the gap between the radio button and text */
+  width: 18px; /* Equal size for radio buttons */
+  height: 18px;
+}
+
+
+
+.submit-btn {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #f57f17;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #f57f17;
+}
+
+.success-message {
+  margin-top: 15px;
+  font-size: 16px;
+  color: green;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .confirmation-box {
+    width: 85%;
+  }
+}
