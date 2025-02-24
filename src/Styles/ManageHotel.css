@@ -1,84 +1,241 @@
-.admin-container {
-    padding: 24px;
-    max-width: 800px;
-    margin: auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4ead8;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Button Styling */
+button {
+  background-color: #c07f00; /* Warm gold-like color */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  /* padding-bottom:20px; */
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #a56a00;
+}
+
+.delete-btn {
+  background-color: #e63946;
+}
+
+.delete-btn:hover {
+  background-color: #b3202a;
+}
+
+/* Table Styling */
+.hotels-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.hotels-table th,
+.hotels-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.hotels-table th {
+  background-color: #c07f00;
+  color: white;
+}
+
+.hotels-table tr:nth-child(even) {
+  background-color: #f9f1e7;
+}
+
+/* Overlay Modal */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's on top */
+}
+
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+  margin-bottom: 15px;
+  color: #c07f00;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f9f1e7;
+}
+
+.modal-form input:focus {
+  outline: none;
+  border-color: #c07f00;
+  box-shadow: 0 0 5px rgba(192, 127, 0, 0.5);
+}
+
+/* Close Button */
+.close-btn {
+  margin-top: 10px;
+  background-color: #6c757d;
+}
+
+.close-btn:hover {
+  background-color: #5a6268;
+}
+
+#icon-btn-add{
+  font-size: 20px;
+}
+ul{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal {
+    width: 90%;
   }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  .hotel-form {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  
-  .input-field {
-    flex: 1;
+
+  .hotels-table th,
+  .hotels-table td {
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
   }
-  
-  .submit-button {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .hotel-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-  }
-  
-  .hotel-card {
-    padding: 16px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hotel-name {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .hotel-location, .hotel-price {
-    color: #555;
-  }
-  
-  .button-group {
-    margin-top: 8px;
-    display: flex;
-    gap: 8px;
-  }
-  
-  .edit-button {
-    background-color: #28a745;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+}
+/* Container for image previews */
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Main image preview styling */
+.main-image-preview {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #007bff;
+}
+
+/* Additional images preview styling */
+.additional-images-preview {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Style the preview container */
+.image-preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.image-preview-wrapper label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.modal {
+  max-height: 90vh; /* Prevents it from being too tall */
+  overflow-y: auto; /* Enables scrolling */
+}
+
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+.image-container img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.icon-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  line-height: 1;
+}
+#icon-btn-desc {
+  top: 2px;
+  right: 2px;
+  background: rgba(255, 255, 255, 0.885);
+  color: rgb(12, 12, 12);
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.icon-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.add-more {
+  position: relative;
+  background: transparent;
+  color: black;
+  font-size: 18px;
+  border: 1px solid #aaa;
+  padding: 3px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add-more:hover {
+  background: #f0f0f0;
+}
