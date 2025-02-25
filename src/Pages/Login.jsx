@@ -27,7 +27,8 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/users/login", formData);
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("userID", response.data.user.id);
+      console.log(localStorage.getItem("userID"))
       navigate("/home"); // Redirect to Home after login
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");

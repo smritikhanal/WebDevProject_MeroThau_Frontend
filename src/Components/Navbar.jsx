@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom"; 
-import "../Styles/Navbar.css"; 
-import logo from "../assets/logo.png"; 
-import { FaUserCircle } from 'react-icons/fa'; // Import the profile icon (FontAwesome)
+import { Link, useLocation } from "react-router-dom";
+import "../Styles/Navbar.css";
+import logo from "../assets/logo.png";
+import { FaUserCircle } from "react-icons/fa"; // Profile Icon
 
 const Navbar = () => {
-  const [loginClicked, setLoginClicked] = useState(false); // State to track Login button click
-  const location = useLocation(); // Get the current route
+  const [loginClicked, setLoginClicked] = useState(false); 
+  const location = useLocation();
 
   useEffect(() => {
-    // Check if loginClicked is stored in localStorage
     const loggedIn = localStorage.getItem("loginClicked");
     if (loggedIn === "true") {
-      setLoginClicked(true); // Set the state if loginClicked is true
+      setLoginClicked(true);
     }
-  }, [location]); // Re-run when the location changes
+  }, [location]);
+
+  // Function to check if a route should be active for "Services"
+  const isServicesActive = () => {
+    const serviceRoutes = [
+      "/services",
+      "/all-hotels",
+      "/ReviewFeedback",
+      "/Pages/Confirmation",
+    ];
+    return (
+      serviceRoutes.some((route) => location.pathname.startsWith(route)) ||
+      location.pathname.includes("/Hotels/")
+    );
+  };
 
   return (
     <header className="navbar-header">
@@ -26,27 +39,10 @@ const Navbar = () => {
         <Link to="/home" className={location.pathname === "/home" ? "active" : ""}>
           Home
         </Link>
-
-        <Link 
-          to="/AboutUs" 
-          className={ location.pathname.startsWith("/AboutUs") ? "active" : ""}
-        >
+        <Link to="/AboutUs" className={location.pathname.startsWith("/AboutUs") ? "active" : ""}>
           About Us
         </Link>
-
-        <Link 
-          to="/services" 
-          className={location.pathname.startsWith("/services") ||
-            location.pathname.startsWith("/all-hotels") ||
-            location.pathname.startsWith("/ReviewFeedback") ||
-            location.pathname.startsWith("/Hotels/HotelMalla") ||
-            location.pathname.startsWith("/Hotels/Fishtail") ||
-            location.pathname.startsWith("/Hotels/KarmaVilla") ||
-            location.pathname.startsWith("/Hotels/LakesideStay") ||
-            location.pathname.startsWith("/Pages/Confirmation") 
-            ? "active" : ""
-          }
-        >
+        <Link to="/services" className={isServicesActive() ? "active" : ""}>
           Services
         </Link>
         <Link to="/contactus" className={location.pathname === "/contactus" ? "active" : ""}>
@@ -54,22 +50,22 @@ const Navbar = () => {
         </Link>
       </nav>
 
-      {/* Conditionally render the Login button on the homepage */}
-      {location.pathname === "/home" && (
-        <>
-          <button className="auth-button">
-            <Link to="/login">Login</Link>
-          </button>
-          
-          {/* Profile Icon with Tooltip */}
-          <div className="profile-icon-container">
-            <Link to="/profile">
-              <FaUserCircle className="profile-icon" />
-            </Link>
-            <span className="tooltip">Update Your Profile</span>
-          </div>
-        </>
-      )}
+      {/* Conditionally show the Login button only on the Home page */}
+      <div className="auth-section">
+        {location.pathname === "/home" && (
+          <Link to="/" onClick={() => localStorage.removeItem("userID")}>
+            <button className="auth-button">Login</button>
+          </Link>
+        )}
+
+        {/* Profile Icon with Hover Tooltip */}
+        <div className="profile-icon-container">
+          <Link to="/profile">
+            <FaUserCircle className="profile-icon" />
+          </Link>
+          <span className="tooltip">Update Your Profile</span>
+        </div>
+      </div>
     </header>
   );
 };

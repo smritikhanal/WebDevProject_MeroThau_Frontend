@@ -228,7 +228,7 @@ const Hotels = () => {
 
       {/* ✅ Overlay Modal */}
       {modalOpen && (
-        <div className="overlay">
+        <div className="manage-hotel-overlay">
           <div className="modal">
             <h2>{isEditing ? "Edit Hotel" : "Add New Hotel"}</h2>
             <form onSubmit={handleSubmit} className="modal-form">

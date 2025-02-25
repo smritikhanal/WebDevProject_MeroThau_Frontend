@@ -15,7 +15,10 @@ import KarmaVilla from './Hotels/KarmaVilla';
 import LakesideStay from './Hotels/LakesideStay';
 import Confirmation from './Pages/Confirmation';
 import ReviewFeedback from './Pages/ReviewFeedback';
-import ManageHotel from './Admin/ManageHotel';
+import ManageHotel from "./Admin/ManageHotel";
+import AdminDashboard from "./Admin/AdminDashboard";
+import HotelDetails from "./Pages/HotelDetails";
+
 
 const App = () => {
   return (
@@ -36,7 +39,15 @@ const App = () => {
          <Route path="/Pages/Confirmation" element={<Confirmation />} /> 
         <Route path="/contactus" element={<ContactUs />} /> 
         <Route path="/ReviewFeedback" element={<ReviewFeedback />} />
-        <Route path="/ManageHotel" element={<ManageHotel />} />
+
+
+        <Route path="/manage-hotel" element={<ManageHotel />} />
+        {/* <Route path="/manage-user" element={<Manageu />} /> */}
+        <Route path="/Hotels/:id" element={<HotelDetails />} /> 
+
+        <Route path="/admin-page" element={<AdminDashboard />} />
+
+        
       </Routes>
     </Router>
   );
