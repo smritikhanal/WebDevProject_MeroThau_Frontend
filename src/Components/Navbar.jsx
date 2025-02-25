@@ -5,15 +5,9 @@ import logo from "../assets/logo.png";
 import { FaUserCircle } from "react-icons/fa"; // Profile Icon
 
 const Navbar = () => {
-  const [loginClicked, setLoginClicked] = useState(false); 
-  const location = useLocation();
+ 
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const loggedIn = localStorage.getItem("loginClicked");
-    if (loggedIn === "true") {
-      setLoginClicked(true);
-    }
-  }, [location]);
 
   // Function to check if a route should be active for "Services"
   const isServicesActive = () => {
@@ -48,15 +42,25 @@ const Navbar = () => {
         <Link to="/contactus" className={location.pathname === "/contactus" ? "active" : ""}>
           Contact Us
         </Link>
+        
       </nav>
 
       {/* Conditionally show the Login button only on the Home page */}
       <div className="auth-section">
-        {location.pathname === "/home" && (
-          <Link to="/" onClick={() => localStorage.removeItem("userID")}>
+       { !token ? (
+          <Link to="/" >
             <button className="auth-button">Login</button>
           </Link>
-        )}
+        ):
+        (<button className="auth-button" onClick={() => {
+          localStorage.removeItem("userID");
+          localStorage.removeItem("token");
+          window.location.replace("/"); 
+        }}>
+          Log Out
+        </button>
+        )
+        }
 
         {/* Profile Icon with Hover Tooltip */}
         <div className="profile-icon-container">

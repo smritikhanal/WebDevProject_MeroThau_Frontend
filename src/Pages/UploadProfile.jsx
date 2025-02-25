@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import "../Styles/UploadProfile.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const UploadProfile = () => {
   const [userId, setUserId] = useState(null);
@@ -75,11 +76,15 @@ const UploadProfile = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/api/users/update/${userId}`, formData, {
+      const response = await axios.put(`http://localhost:3000/api/users/update/${userId}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      alert("User profile updated successfully!");
+      if(response.error){
+        toast.error("failed to update user details")
+      }
+
+      toast.success("User details updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -87,6 +92,7 @@ const UploadProfile = () => {
 
   return (
     <>
+    <ToastContainer />
       <Navbar />
       <div className="upload-profile-page">
         <div className="upload-profile-container">

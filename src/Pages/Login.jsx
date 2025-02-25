@@ -11,25 +11,33 @@ const Login = () => {
   });
   const [error, setError] = useState("");
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/home"); // Redirect to home if already logged in
-  //   }
-  // }, [navigate]);
+  // Redirect to home if already logged in
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  console.log(formData, "formaData");
+
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page refresh
+    setError(""); // Reset error message
+
     try {
       const response = await axios.post("http://localhost:3000/api/users/login", formData);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("userID", response.data.user.id);
-      console.log(localStorage.getItem("userID"))
-      navigate("/home"); // Redirect to Home after login
+      const { token, user } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("userID", user.id);
+
+      console.log("User ID:", localStorage.getItem("userID"));
+      navigate("/home");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
     }
@@ -41,14 +49,37 @@ const Login = () => {
         <h2>Login now!</h2>
         <form onSubmit={handleLogin}>
           <label>Email</label>
-          <input type="email" name="email" placeholder="Enter your email" required value={formData.email} onChange={handleChange} />
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+
           <label>Password</label>
-          <input type="password" name="password" placeholder="Enter your password" required value={formData.password} onChange={handleChange} />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+
           {error && <p className="error">{error}</p>}
-          <button type="submit" className="login-btn">LOGIN</button>
+
+          <button type="submit" className="login-btn">
+            LOGIN
+          </button>
         </form>
+
         <p className="register-text">
-          Don’t have an account? <a href="#" onClick={() => navigate("/register")}>Create Now</a>
+          Don’t have an account?{" "}
+          <a href="#" onClick={() => navigate("/register")}>
+            Create Now
+          </a>
         </p>
       </div>
     </div>

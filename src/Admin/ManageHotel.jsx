@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../Styles/ManageHotel.css";
+import { Edit, Trash2 } from "lucide-react";
+import { toast, ToastContainer } from "react-toastify";
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -110,6 +112,45 @@ const Hotels = () => {
     setImagePreviews([...imagePreviews, ...previewUrls]);
   };
 
+  const handleDeleteImage = async (index) => {
+    if (!isEditing) {
+      // ✅ Remove from UI only if adding a new hotel
+      const newImages = [...hotelData.images];
+      newImages.splice(index, 1);
+      setHotelData({ ...hotelData, images: newImages });
+  
+      const newPreviews = [...imagePreviews];
+      newPreviews.splice(index, 1);
+      setImagePreviews(newPreviews);
+      return;
+    }
+  
+    // ✅ If editing, remove image from backend
+    try {
+      const updatedImages = [...hotelData.images];
+      updatedImages.splice(index, 1);
+      setHotelData({ ...hotelData, images: updatedImages });
+  
+      const updatedPreviews = [...imagePreviews];
+      updatedPreviews.splice(index, 1);
+      setImagePreviews(updatedPreviews);
+  
+      // await axios.put(`http://localhost:3000/api/hotels/update-hotel/${selectedHotelId}`, {
+      //   images: updatedImages, // Send only remaining images
+      // },{
+      //   headers: { "Content-Type": "multipart/form-data" }
+      // });
+  
+      toast.success("Image deleted successfully!");
+      fetchHotels(); // ✅ Refresh data
+    } catch (error) {
+      console.error("Error updating hotel images:", error);
+      toast.error("Failed to delete image.");
+    }
+  };
+  
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -129,7 +170,15 @@ const Hotels = () => {
 
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:3000/api/hotels/update-hotel/${selectedHotelId}`, formData);
+        const response = await axios.put(`http://localhost:3000/api/hotels/update-hotel/${selectedHotelId}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        });
+        if(response?.error){
+          toast.error("Failed to update hotel details");
+        }
+        else{
+          toast.success("Hotel details updated successfully");
+        }
       } else {
         await axios.post("http://localhost:3000/api/hotels/add-hotel/", formData);
       }
@@ -146,42 +195,22 @@ const Hotels = () => {
     setHotelData({ ...hotelData, description: updatedDescription });
   };
   
-  const handleDeleteImage = async (index) => {
-    if (!isEditing) {
-      // Remove only from frontend if adding a new hotel
-      const newImages = [...hotelData.images];
-      newImages.splice(index, 1);
-      setHotelData({ ...hotelData, images: newImages });
   
-      const newPreviews = [...imagePreviews];
-      newPreviews.splice(index, 1);
-      setImagePreviews(newPreviews);
-      return;
-    }
-  
-    // If editing, send update request to backend
-    const updatedImages = hotelData.images.filter((_, i) => i !== index);
-    const updatedPreviews = imagePreviews.filter((_, i) => i !== index);
-  
-    setHotelData({ ...hotelData, images: updatedImages });
-    setImagePreviews(updatedPreviews);
-  
-    try {
-      await axios.put(`http://localhost:3000/api/hotels/update-hotel/${selectedHotelId}`, {
-        images: updatedImages,
-      });
-      fetchHotels(); // Refresh the hotel list
-    } catch (error) {
-      console.error("Error updating hotel images:", error);
-    }
-  };
+    
   
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this hotel?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/hotels/delete-hotel/${id}`);
+        const response = await axios.delete(`http://localhost:3000/api/hotels/${id}`);
+        if (response.error){
+          console.error("Error deleting hotel:", response.error);
+          toast.error("Error deleting hotel");
+        }
+        else{
+          toast.success("Hotel deleted successfully");
         fetchHotels();
+      }
       } catch (error) {
         console.error("Error deleting hotel:", error);
       }
@@ -190,6 +219,7 @@ const Hotels = () => {
 
   return (
     <div style={{ padding: "20px" }}>
+      <ToastContainer />
       <h2>Manage Hotels</h2>
       <button onClick={() => handleOpenModal()} style={{ marginBottom: "10px" }}>
         + Add New Hotel
@@ -217,9 +247,16 @@ const Hotels = () => {
               <td>{hotel.discountPercent || 0}%</td>
               <td>{hotel.rating}</td>
               <td>{hotel.rooms}</td>
-              <td>
-                <button onClick={() => handleOpenModal(hotel)}>Edit</button>
-                <button onClick={() => handleDelete(hotel.id)} className="delete-btn">Delete</button>
+              <td style={{
+                display: "flex",
+                gap: "6px"
+              }}>
+                <button onClick={() => handleOpenModal(hotel)}>
+                  <Edit />
+                </button>
+                <button onClick={() => handleDelete(hotel.id)} className="delete-btn">
+                  <Trash2 />
+                </button>
               </td>
             </tr>
           ))}
@@ -235,7 +272,7 @@ const Hotels = () => {
               <input type="text" name="name" placeholder="Hotel Name" value={hotelData.name} onChange={handleChange} required />
               <input type="text" name="location" placeholder="Location" value={hotelData.location} onChange={handleChange} required />
               <input type="number" name="price" placeholder="Price per Night" value={hotelData.price} onChange={handleChange} required />
-              <input type="number" name="rating" placeholder="Rating (1-5)" value={hotelData.rating} onChange={handleChange} required />
+              <input type="number" min={1} max={5} name="rating" placeholder="Rating (1-5)" value={hotelData.rating} onChange={handleChange} required />
               <input type="number" name="rooms" placeholder="Available Rooms" value={hotelData.rooms} onChange={handleChange} required />
 
               <label>Description:</label>
@@ -281,10 +318,12 @@ const Hotels = () => {
 <input type="file" accept="image/*" multiple onChange={handleImagesChange} />
 
 <div className="image-preview-container">
-  {imagePreviews.map((src, index) => (
+  {imagePreviews?.map((src, index) => (
     <div key={index} className="image-container">
       <img src={src} alt={`Preview ${index}`} className="additional-images-preview" />
       <button className="icon-btn" onClick={() => handleDeleteImage(index)}>✖</button>
+
+
     </div>
   ))}
 </div>
@@ -300,6 +339,6 @@ const Hotels = () => {
       )}
     </div>
   );
-};
+}
 
 export default Hotels;
